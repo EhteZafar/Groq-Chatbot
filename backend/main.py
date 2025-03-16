@@ -5,12 +5,15 @@ from typing import List
 from groq import Groq
 import os
 from dotenv import load_dotenv
+import markdown
+import bleach
+from prompts import SYSTEM_PROMPT  # Import the prompt from prompts.py
 
 # Load environment variables
 load_dotenv()
 
 # Initialize FastAPI app
-app = FastAPI(title="Groq Chat API")
+app = FastAPI(title="Pakistani Chef AI")
 
 # Add CORS middleware
 app.add_middleware(
@@ -40,28 +43,43 @@ class ChatResponse(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the Groq-powered Chat API"}
+    return {"message": "Welcome to the Pakistani Chef AI API"}
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(chat_message: ChatMessage):
     try:
         # Prepare the messages for the Groq API
-        messages = [{"role": "user", "content": msg} for msg in chat_message.history]
+        messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+
+        # Limit history to the last 5 messages to prevent excessive token usage
+        conversation_history = chat_message.history[-5:]
+
+        # Add conversation history
+        for msg in conversation_history:
+            messages.append({"role": "user", "content": msg})
+
+        # Add the current message
         messages.append({"role": "user", "content": chat_message.message})
-        
+
         # Call Groq API
         chat_completion = client.chat.completions.create(
             messages=messages,
-            model="llama-3.3-70b-versatile",  # Using the latest production model
+            model="llama-3.3-70b-versatile",
             temperature=0.7,
             max_tokens=1024,
         )
-        
+
         # Extract the response
         response = chat_completion.choices[0].message.content
-        
-        return ChatResponse(response=response)
-    
+
+        # Convert Markdown to HTML
+        formatted_html = markdown.markdown(response)
+
+        # Sanitize HTML to prevent XSS attacks
+        safe_html = bleach.clean(formatted_html, tags=["b", "i", "strong", "em", "p", "ul", "ol", "li", "h1", "h2", "h3", "h4", "h5", "h6"])
+
+        return ChatResponse(response=safe_html)
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
