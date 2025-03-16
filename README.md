@@ -1,110 +1,98 @@
-# Chatbot Practise Project
+# AI Chat Interface
 
-This project is a chatbot application powered by FastAPI for the backend and Next.js for the frontend. The backend uses the Groq API to generate responses, and the frontend provides an interactive UI for users to chat with the bot.
+A modern, interactive chat application built with Next.js and FastAPI, powered by Groq's LLM API.
+
+![Chat Interface Preview]
+*(You can add a screenshot of your application here)*
+
+## Features
+
+- 💬 Real-time chat interface with message bubbles
+- 🎨 Modern and responsive design
+- 🌓 Dark mode support
+- ⚡ Fast responses powered by Groq's LLM
+- 🔄 Message history tracking
+- 📱 Mobile-friendly interface
+
+## Tech Stack
+
+### Frontend
+- [Next.js 14](https://nextjs.org/) - React framework
+- [TailwindCSS](https://tailwindcss.com/) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Geist Font](https://vercel.com/font) - Modern typography
+
+### Backend
+- [FastAPI](https://fastapi.tiangolo.com/) - Python web framework
+- [Groq](https://groq.com/) - LLM API provider
+- [Python 3.x](https://www.python.org/) - Backend language
+- [uvicorn](https://www.uvicorn.org/) - ASGI server
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- Python 3.x
+- Groq API key
+
+### Environment Setup
+
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd chatbot-practise
+```
+
+2. Backend setup:
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+3. Create a `.env` file in the backend directory:
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+4. Frontend setup:
+```bash
+cd frontend
+npm install
+```
+
+### Running the Application
+
+1. Start the backend server:
+```bash
+cd backend
+uvicorn main:app --reload
+```
+The API will be available at `http://localhost:8000`
+
+2. In a new terminal, start the frontend development server:
+```bash
+cd frontend
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Project Structure
 
-```
-chatbot-practise/
-├── backend/
-│   ├── main.py
-│   ├── requirements.txt
-│   ├── .env
-├── frontend/
-│   ├── components/
-│   │   ├── Chatbot.tsx
-│   ├── pages/
-│   │   ├── index.tsx
-│   ├── styles/
-│   │   ├── globals.css
-│   ├── tailwind.config.js
-│   ├── postcss.config.js
-│   ├── tsconfig.json
-│   ├── package.json
-├── README.md
-```
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Backend Setup
+## Learn More
 
-1. **Navigate to the backend directory**:
-   ```sh
-   cd backend
-   ```
+To learn more about Next.js, take a look at the following resources:
 
-2. **Create and activate a virtual environment**:
-   ```sh
-   python -m venv venv
-   source venv/Scripts/activate  # On Windows
-   ```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-3. **Install the dependencies**:
-   ```sh
-   pip install -r requirements.txt
-   ```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-4. **Set up environment variables**:
-   Ensure you have a `.env` file with the following content:
-   ```dotenv
-   GROQ_API_KEY=your_groq_api_key
-   ```
+## Deploy on Vercel
 
-5. **Run the FastAPI application**:
-   ```sh
-   python main.py
-   ```
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-The backend will be running at `http://0.0.0.0:8000`.
-
-## Frontend Setup
-
-1. **Navigate to the frontend directory**:
-   ```sh
-   cd frontend
-   ```
-
-2. **Install the dependencies**:
-   ```sh
-   npm install
-   ```
-
-3. **Run the Next.js development server**:
-   ```sh
-   npm run dev
-   ```
-
-The frontend will be running at `http://localhost:3000`.
-
-## Using the Chatbot
-
-1. Open your browser and navigate to `http://localhost:3000`.
-2. You will see an interactive chatbot UI.
-3. Type your message and press Enter or click the "Send" button to interact with the chatbot.
-
-## API Endpoints
-
-### `GET /`
-
-Returns a welcome message.
-
-### `POST /chat`
-
-Accepts a JSON payload with the user's message and chat history, and returns a response from the chatbot.
-
-**Request Body**:
-```json
-{
-  "message": "Your message here",
-  "history": ["Previous message 1", "Previous message 2"]
-}
-```
-
-**Response**:
-```json
-{
-  "response": "Chatbot's response"
-}
-```
-
-## License
-
-This project is licensed under the MIT License.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
