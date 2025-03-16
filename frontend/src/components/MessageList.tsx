@@ -13,15 +13,14 @@ interface MessageListProps {
 
 const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, messagesEndRef }) => {
   return (
-    <div className="flex-1 overflow-y-auto mb-4 p-4 custom-scrollbar">
+    <div className="flex-1 overflow-y-auto mb-4 custom-scrollbar">
       <>
         {messages.map((msg, index) => (
           <div
             key={index}
             className={`message-bubble ${msg.isUser ? "user-message" : "ai-message"} mb-2`}
-          >
-            {msg.content}
-          </div>
+            dangerouslySetInnerHTML={{ __html: msg.content }}
+          />
         ))}
         {isLoading && (
           <div className="message-bubble ai-message mb-2">

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import MessageList from "../components/MessageList";
 import MessageForm from "../components/MessageForm";
+import Header from "../components/Header";
 
 interface Message {
   content: string;
@@ -11,7 +12,7 @@ interface Message {
 
 export default function Home() {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Message[]>([{ content: "Hi, what can I help you with?", isUser: false }]);
+  const [messages, setMessages] = useState<Message[]>([{ content: "Ask me anything about Pakistani cuisine, recipes, and cooking tips!", isUser: false }]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -46,19 +47,9 @@ export default function Home() {
 
       const data = await res.json();
       const aiMessageContent = data.response;
-      let aiMessage = { content: "", isUser: false };
+      let aiMessage = { content: aiMessageContent, isUser: false };
       setMessages((prev) => [...prev, aiMessage]);
       setIsLoading(false); // Stop showing the loading indicator
-
-      for (let i = 0; i < aiMessageContent.length; i++) {
-        aiMessage.content += aiMessageContent[i];
-        setMessages((prev) => {
-          const newMessages = [...prev];
-          newMessages[newMessages.length - 1] = { ...aiMessage };
-          return newMessages;
-        });
-        await new Promise((resolve) => setTimeout(resolve, 5)); // Adjust typing speed here
-      }
     } catch (error) {
       console.error("Error:", error);
       setIsLoading(false); // Stop showing the loading indicator in case of error
@@ -66,7 +57,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <Header />
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="flex-1 p-4 sm:p-6 flex flex-col h-[80vh]">
           <div className="flex-1 overflow-y-auto mb-4 p-4 custom-scrollbar">
