@@ -1,24 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Chat Interface
+
+A modern, interactive chat application built with Next.js and FastAPI, powered by Groq's LLM API.
+
+![Chat Interface Preview]
+*(You can add a screenshot of your application here)*
+
+## Features
+
+- 💬 Real-time chat interface with message bubbles
+- 🎨 Modern and responsive design
+- 🌓 Dark mode support
+- ⚡ Fast responses powered by Groq's LLM
+- 🔄 Message history tracking
+- 📱 Mobile-friendly interface
+
+## Tech Stack
+
+### Frontend
+- [Next.js 14](https://nextjs.org/) - React framework
+- [TailwindCSS](https://tailwindcss.com/) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Geist Font](https://vercel.com/font) - Modern typography
+
+### Backend
+- [FastAPI](https://fastapi.tiangolo.com/) - Python web framework
+- [Groq](https://groq.com/) - LLM API provider
+- [Python 3.x](https://www.python.org/) - Backend language
+- [uvicorn](https://www.uvicorn.org/) - ASGI server
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ 
+- Python 3.x
+- Groq API key
 
+### Environment Setup
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd chatbot-practise
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Backend setup:
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Create a `.env` file in the backend directory:
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Frontend setup:
+```bash
+cd frontend
+npm install
+```
+
+### Running the Application
+
+1. Start the backend server:
+```bash
+cd backend
+uvicorn main:app --reload
+```
+The API will be available at `http://localhost:8000`
+
+2. In a new terminal, start the frontend development server:
+```bash
+cd frontend
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+## Project Structure
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Learn More
 
